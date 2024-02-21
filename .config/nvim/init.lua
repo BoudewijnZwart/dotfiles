@@ -32,6 +32,7 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+  'ThePrimeagen/git-worktree.nvim',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -259,7 +260,7 @@ vim.wo.number = true
 vim.o.mouse = 'a'
 
 -- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
+-- Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 
@@ -328,7 +329,7 @@ require('telescope').setup {
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
-
+pcall(require('telescope').load_extension, 'ThePrimeagen/git-worktree.nvim')
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
 local function find_git_root()
@@ -392,6 +393,8 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>st', require('telescope').extensions.git_worktree.git_worktrees, { desc = '[S]earch through the git work [t]rees' })
+vim.keymap.set('n', '<leader>nt', require('telescope').extensions.git_worktree.create_git_worktree, { desc = '[N]ew git work [t]rees' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
